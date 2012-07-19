@@ -46,6 +46,7 @@ class HighScoresController < ApplicationController
       if @high_score.save
         format.html { redirect_to @high_score, notice: 'High score was successfully created.' }
         format.json { render json: @high_score, status: :created, location: @high_score }
+	format.xml  { render xml: @high_score, status: :created, location: @high_score }
       else
         format.html { render action: "new" }
         format.json { render json: @high_score.errors, status: :unprocessable_entity }
@@ -62,9 +63,11 @@ class HighScoresController < ApplicationController
       if @high_score.update_attributes(params[:high_score])
         format.html { redirect_to @high_score, notice: 'High score was successfully updated.' }
         format.json { head :no_content }
+	format.xml  { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @high_score.errors, status: :unprocessable_entity }
+        format.xml  { render xml: @high_score.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -78,6 +81,7 @@ class HighScoresController < ApplicationController
     respond_to do |format|
       format.html { redirect_to high_scores_url }
       format.json { head :no_content }
+      format.xml  { head :no_content }
     end
   end
 end
